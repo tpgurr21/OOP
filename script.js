@@ -26,3 +26,17 @@ console.log(jacob, jack);
 
 
 console.log(thomas instanceof Person); // True or False
+
+// Prototypes
+console.log(Person.prototype)
+
+Person.prototype.calcAge = function() {
+        console.log(2037 - this.birthYear);
+};
+
+thomas.calcAge();
+jacob.calcAge();
+
+console.log(thomas.__proto__)
+console.log(Person.prototype)
+console.log(thomas.__proto__ === Person.prototype);
