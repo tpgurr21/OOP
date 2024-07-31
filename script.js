@@ -40,3 +40,15 @@ jacob.calcAge();
 console.log(thomas.__proto__)
 console.log(Person.prototype)
 console.log(thomas.__proto__ === Person.prototype);
+
+console.log(Person.prototype.isPrototypeOf(thomas)) // confirms person.prototype is prototype of thomas, not prototype of Person
+console.log(Person.prototype.isPrototypeOf(Person)) // This is false
+
+// Prototype property is a "prototype of linked objects"
+
+Person.prototype.species = 'Homo Sapien';
+console.log(thomas.species, jacob.species)
+
+console.log(thomas.hasOwnProperty('firstName')) // tests to see if this is directly on the object (its own property)
+console.log(thomas.hasOwnProperty('species')) // this will be false because 
+console.log(thomas.hasOwnProperty('calcAge'))
