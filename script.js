@@ -52,3 +52,13 @@ console.log(thomas.species, jacob.species)
 console.log(thomas.hasOwnProperty('firstName')) // tests to see if this is directly on the object (its own property)
 console.log(thomas.hasOwnProperty('species')) // this will be false because 
 console.log(thomas.hasOwnProperty('calcAge'))
+
+console.log(thomas.calcAge)
+console.log(thomas)
+console.log(thomas.__proto__);
+console.log(thomas.__proto__.__proto__);
+console.log(thomas.__proto__.__proto__.__proto__); // This is past the top of the scope chain, so it returns null
+
+console.log(Person.prototype.constructor);
+console.dir(Person.prototype.constructor);
+
