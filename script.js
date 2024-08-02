@@ -1,6 +1,6 @@
 'use strict';
 
-/*
+
 
 const Person = function(firstName, birthYear) {
     // Instance properties
@@ -28,6 +28,16 @@ console.log(jacob, jack);
 
 
 console.log(thomas instanceof Person); // True or False
+
+// Static Method
+Person.hey = function () {
+    console.log('Hey there 👋')
+    console.log(this)
+}
+
+Person.hey();
+// jonas.hey(); // This doesn't work because it can't inherit this from the Person object
+
 
 // Prototypes
 console.log(Person.prototype)
@@ -82,10 +92,10 @@ console.dir(x=>x + 1)
 
 ///////////////////////       CHALLENGE #1
 
-const Car = function(make, speed) {
-    this.make = make;
-    this.speed = speed;
-}
+// const Car = function(make, speed) {
+//     this.make = make;
+//     this.speed = speed;
+// }
 
 // My solution
 // Car.prototype.accelerate = function() {
@@ -96,14 +106,14 @@ const Car = function(make, speed) {
 // }
 
 // Actual solution
-Car.prototype.accelerate = function() {
-    this.speed += 10;
-    console.log(`${this.make} is going at ${this.speed} km/h`)
-}
-Car.prototype.brake = function() {
-    this.speed -=5;
-    console.log(`${this.make} is going at ${this.speed} km/h`)
-}
+// Car.prototype.accelerate = function() {
+//     this.speed += 10;
+//     console.log(`${this.make} is going at ${this.speed} km/h`)
+// }
+// Car.prototype.brake = function() {
+//     this.speed -=5;
+//     console.log(`${this.make} is going at ${this.speed} km/h`)
+// }
 
 
 
@@ -143,7 +153,6 @@ bmw.accelerate()
 bmw.accelerate()
 mercedes.brake()
 
-*/
 
 // class expression
 // const PersonCl = class{}
@@ -155,7 +164,7 @@ class PersonCl {
         this.fullName = fullName;
         this.birthYear = birthYear;
     }
-
+    // Instance Methods
     // Methods will be added to .prototype property
     calcAge() {
         console.log(2037 - this.birthYear);
@@ -179,6 +188,12 @@ class PersonCl {
     get fullName() {
         return this._fullName;
     }
+
+    // Static method
+    static hey() {
+        console.log('Hey there 👋')
+        console.log(this)
+    }
 }
 
 const jessica = new PersonCl('Jessica Davis', 1996);
@@ -199,20 +214,27 @@ jessica.greet();
 
 const walter = new PersonCl('Walter White', 1965);
 
-const account = {
-    owner: 'jonas',
-    movements: [200, 530, 120, 300],
+PersonCl.hey();
 
-    get latest () {
-        return this.movements.slice(-1).pop();
-    },
+/////////////////////////////////
+// Setters and Getters
 
-    set latest(mov) {
-        this.movements.push(mov);
-    }
-}
+// const account = {
+//     owner: 'jonas',
+//     movements: [200, 530, 120, 300],
 
-console.log(account.latest) // write it as if it's a property
+//     get latest () {
+//         return this.movements.slice(-1).pop();
+//     },
 
-account.latest = 50
-console.log(account.movements)
+//     set latest(mov) {
+//         this.movements.push(mov);
+//     }
+// }
+
+// console.log(account.latest) // write it as if it's a property
+
+// account.latest = 50
+// console.log(account.movements)
+
+
