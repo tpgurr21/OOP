@@ -261,7 +261,6 @@ const sarah = Object.create(PersonProto);
 sarah.init('Sarah', 1979);
 sarah.calcAge();
 
-*/
 
 class CarCl {
     constructor(make, speed) {
@@ -296,3 +295,34 @@ ford.accelerate();
 ford.brake();
 ford.speedUS = 50;
 console.log(ford);
+
+*/
+
+const Person = function(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+};
+   
+    Person.prototype.calcAge = function() {
+        console.log(2037 - this.birthYear);
+};
+
+const Student = function(firstName, birthYear, course) {
+    // this.firstName = firstName;
+    // this.birthYear = birthYear;
+    Person.call(this, firstName, birthYear); // allows us to establish the "this" keyword
+    this.course = course;
+};
+
+// Linking prototypes
+Student.prototype = Object.create(Person.prototype)
+
+
+Student.prototype.introduce = function() {
+    console.log(`My name is ${this.firstName} and I study ${this.course}`);
+}
+
+const mike = new Student('Mike', 2020, 'Computer Science')
+console.log(mike);
+mike.introduce();
+mike.calcAge();
