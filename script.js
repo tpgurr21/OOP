@@ -105,7 +105,26 @@ Car.prototype.brake = function() {
     console.log(`${this.make} is going at ${this.speed} km/h`)
 }
 
+
+
 // Solution with classes
+
+class Car {
+    constructor(make, speed) {
+        this.make = make;
+        this.speed = speed;
+    }
+
+    accelerate() {
+        this.speed += 10;
+    console.log(`${this.make} is going at ${this.speed} km/h`)
+    }
+
+    brake() {
+        this.speed -=5;
+    console.log(`${this.make} is going at ${this.speed} km/h`)
+    }
+}
 
 // const car1 = new Car('BMW', 120);
 // const car2 = new Car('Mercedes', 95);
@@ -132,8 +151,8 @@ mercedes.brake()
 // class declaration
 
 class PersonCl {
-    constructor(firstName, birthYear) {
-        this.firstName = firstName;
+    constructor(fullName, birthYear) {
+        this.fullName = fullName;
         this.birthYear = birthYear;
     }
 
@@ -146,11 +165,26 @@ class PersonCl {
         console.log(`Hey ${this.firstName}`);
     }
 
+    get age() {
+        return 2037 - this.birthYear
+    }
+
+    // Set a property that already exists
+    set fullName(name) {
+        console.log(name);
+        if(name.includes(' ')) this._fullName = name;
+        else alert(`${name} is not a full name!`)
+    }
+
+    get fullName() {
+        return this._fullName;
+    }
 }
 
-const jessica = new PersonCl('Jessica', 1996);
+const jessica = new PersonCl('Jessica Davis', 1996);
 console.log(jessica);
 jessica.calcAge();
+console.log(jessica.age)
 
 console.log(jessica.__proto__ === PersonCl.prototype);
 
@@ -162,3 +196,23 @@ jessica.greet();
 // 1. Classes are NOT hoisted
 // 2. Classes are first-class citizens
 // 3. Classes are executed in strict mode
+
+const walter = new PersonCl('Walter White', 1965);
+
+const account = {
+    owner: 'jonas',
+    movements: [200, 530, 120, 300],
+
+    get latest () {
+        return this.movements.slice(-1).pop();
+    },
+
+    set latest(mov) {
+        this.movements.push(mov);
+    }
+}
+
+console.log(account.latest) // write it as if it's a property
+
+account.latest = 50
+console.log(account.movements)
