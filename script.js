@@ -1,5 +1,7 @@
 'use strict';
 
+/*
+
 const Person = function(firstName, birthYear) {
     // Instance properties
     //  console.log(this);
@@ -103,12 +105,60 @@ Car.prototype.brake = function() {
     console.log(`${this.make} is going at ${this.speed} km/h`)
 }
 
+// Solution with classes
 
-const car1 = new Car('BMW', 120);
-const car2 = new Car('Mercedes', 95);
+// const car1 = new Car('BMW', 120);
+// const car2 = new Car('Mercedes', 95);
+const bmw = new Car('BMW', 120);
+const mercedes = new Car('Mercedes', 95);
 
-console.log(car1, car2)
+// console.log(car1, car2)
 
-car1.accelerate()
-car1.accelerate()
-car2.brake()
+// car1.accelerate()
+// car1.accelerate()
+// car2.brake()
+
+console.log(bmw, mercedes)
+
+bmw.accelerate()
+bmw.accelerate()
+mercedes.brake()
+
+*/
+
+// class expression
+// const PersonCl = class{}
+
+// class declaration
+
+class PersonCl {
+    constructor(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    }
+
+    // Methods will be added to .prototype property
+    calcAge() {
+        console.log(2037 - this.birthYear);
+    }
+
+    greet() {
+        console.log(`Hey ${this.firstName}`);
+    }
+
+}
+
+const jessica = new PersonCl('Jessica', 1996);
+console.log(jessica);
+jessica.calcAge();
+
+console.log(jessica.__proto__ === PersonCl.prototype);
+
+// PersonCl.prototype.greet = function() {
+//     console.log(`Hey ${this.firstName}`);
+// }
+jessica.greet();
+
+// 1. Classes are NOT hoisted
+// 2. Classes are first-class citizens
+// 3. Classes are executed in strict mode
