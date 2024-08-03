@@ -296,7 +296,6 @@ ford.brake();
 ford.speedUS = 50;
 console.log(ford);
 
-*/
 
 const Person = function(firstName, birthYear) {
     this.firstName = firstName;
@@ -337,3 +336,54 @@ console.log(mike instanceof Object); // This is the prototype chain
 
 Student.prototype.constructor = Student;
 console.dir(Student.prototype.constructor);
+
+*/
+
+const CarCh = function(make, speed) {
+    this.make = make;
+    this.speed = speed;
+}
+
+CarCh.prototype.accelerate = function() {
+    this.speed += 10;
+    console.log(`${this.make} is going at ${this.speed} km/h`)
+}
+
+CarCh.prototype.brake = function() {
+    this.speed -=5;
+    console.log(`${this.make} is going at ${this.speed} km/h`)
+}
+
+const EV = function(make, speed, charge) {
+    CarCh.call(this, make, speed)
+    this.charge = charge;
+}
+
+EV.prototype = Object.create(CarCh.prototype)
+
+EV.prototype.chargeBattery = function(chargeTo) {
+    return this.charge = chargeTo
+}
+
+EV.prototype.accelerate = function() {
+        this.speed += 20;
+        // this.charge -= 1;
+        this.charge--;
+
+        console.log(`${this.make} is going ${this.speed} km/h, with a charge of ${this.charge}%`)
+    }
+
+const tesla = new EV('Tesla', 120, 23)
+const toyota = new CarCh('Toyota', 150)
+tesla.accelerate();
+tesla.brake();
+tesla.brake();
+tesla.accelerate();
+tesla.chargeBattery(90);
+tesla.accelerate();
+
+toyota.accelerate();
+toyota.brake();
+toyota.brake();
+toyota.accelerate();
+toyota.accelerate();
