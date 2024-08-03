@@ -326,3 +326,14 @@ const mike = new Student('Mike', 2020, 'Computer Science')
 console.log(mike);
 mike.introduce();
 mike.calcAge();
+
+console.log(mike.__proto__);
+console.log(mike.__proto__.__proto__);
+
+console.log(mike instanceof Student);
+console.log(mike instanceof Person);
+console.log(mike instanceof Object); // This is the prototype chain
+
+
+Student.prototype.constructor = Student;
+console.dir(Student.prototype.constructor);
