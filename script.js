@@ -475,8 +475,6 @@ const jay = Object.create(StudentProto);
 jay.init('Jay', 2010, 'Computer Science');
 jay.calcAge();
 
-*/
-
 
 // 1) Public fields
 // 2) Private fields (fields must be outside of the constructor)
@@ -554,6 +552,74 @@ Account.helper();
 // console.log(acc1.#pin);
 // acc1.#approveLoan(1000); // Chrome still sees this as a field, not a method
 
-// Chaining
+// Chaining methods
 acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000)
 console.log(acc1.getMovements());
+
+*/
+
+class CarCl {
+    constructor(make, speed) {
+        this.make = make;
+        this.speed = speed;
+    }
+
+    accelerate() {
+        this.speed += 10;
+    console.log(`${this.make} is going at ${this.speed} km/h`)
+    return this;
+    }
+
+    brake() {
+        this.speed -=5;
+    console.log(`${this.make} is going at ${this.speed} km/h`)
+    return this;
+    }
+
+    get speedUS() {
+        return this.speed / 1.6
+    }
+    set speedUS(speed) {
+        this.speed = speed * 1.6
+    }
+}
+
+class EvCl extends CarCl {
+    #charge;
+    constructor(make, speed, charge) {
+        super(make, speed);
+
+        this.#charge = charge;
+    }
+
+    chargeBattery = function(chargeTo) {
+        this.#charge = chargeTo
+        return this;
+    }
+
+    accelerate = function() {
+        this.speed += 20;
+        // this.charge -= 1;
+        this.charge--;
+
+        console.log(`${this.make} is going ${this.speed} km/h, with a charge of ${this.charge}%`)
+        return this;
+    }
+
+}
+
+const rivian = new EvCl('Rivian', 120, 23)
+console.log(rivian);
+// console.log(rivian.#charge);
+
+
+rivian
+    .accelerate()
+    .accelerate()
+    .accelerate()
+    .brake()
+    .chargeBattery(50)
+    .accelerate()
+
+console.log(rivian)
+console.log(rivian.speedUS)
