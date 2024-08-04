@@ -477,39 +477,61 @@ jay.calcAge();
 
 */
 
+
+// 1) Public fields
+// 2) Private fields (fields must be outside of the constructor)
+// 3) Public methods
+// 4) Private methods
+// (there is also the static version of these)
+
 class Account {
+    // 1) Public fields (only on instances, not prototypes)
+    locale = navigator.language;
+    #pin;
+    // 2) Private fields (only on instances, not prototypes)
+    #movements = [];
+
     constructor(owner, currency, pin) {
         this.owner = owner;
         this.currency = currency;
-        this._pin = pin;
         // Protected property
-        this._movements = [];
-        this.locale = navigator.language;
+        this.#pin = pin;
+        // this._movements = [];
+        // this.locale = navigator.language;
 
         console.log(`Thanks for opening an account, ${owner}`);
     }
 
+    // 3) Public methods
+
     // Public interface
     getMovements() {
-        return this._movements;
+        return this.#movements;
     }
     deposit(val) {
-        this._movements.push(val)
+        this.#movements.push(val)
     }
 
     withdraw(val) {
         this.deposit(-val)
     }
 
-    _approveLoan(val) {
-        return true;
-    }
-
     requestLoan(val) {
+        // if(this.#approveLoan(val)) {
         if(this._approveLoan(val)) {
             this.deposit(val);
             console.log(`Your loan of ${val} was approved`);
         }
+    }
+
+    static helper() {
+        console.log('Helper');
+    }
+
+    // 4) Private methods
+    // #approveLoan(val) { // this doesn't work yet, but it should some day soon
+    _approveLoan(val) {
+        return true;
     }
 }
 
@@ -518,10 +540,15 @@ const acc1 = new Account('Jonas', 'EUR', 1111, []);
 // acc1._movements.push(250);
 // acc1._movements.push(-140);
 acc1.deposit(250);
-acc1. withdraw(140);
+acc1.withdraw(140);
 acc1.requestLoan(1000);
-acc1.approveLoan(1000);
 console.log(acc1.getMovements());
 
 console.log(acc1);
 console.log(acc1._pin);
+
+// console.log(acc1.#movements); // This won't work because it's private
+// console.log(acc1.#pin);
+// acc1.#approveLoan(1000); // Chrome still sees this as a field, not a method
+
+Account.helper();
